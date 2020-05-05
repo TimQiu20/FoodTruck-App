@@ -1,0 +1,28 @@
+a {
+    margin: 5px;
+}
+
+table, th, td {
+    border: 1px solid black;
+}
+
+table {
+    table-layout: fixed;
+}
+
+td {
+    word-wrap:break-word;
+}
+
+
+select {
+    margin: 10px;
+}
+
+button {
+    margin: 10px;
+}
+
+input {
+    margin: 10px;
+}

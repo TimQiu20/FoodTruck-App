@@ -1,0 +1,20 @@
+<%- include('partials/header') %>
+
+<div class="container">
+    <h1>Home Page</h1>
+
+    <div class="container">
+        <h3>Hello, <%= username %>! Your role is: <%= classifier %></h3>
+        <a href="/explore" class="btn btn-primary col-md-3 <%= userRoles.customer ? null : 'disabled' %>" role="button">Explore</a>
+        <a href="/orderHistory" class="btn btn-primary col-md-3 <%= userRoles.customer ? null : 'disabled' %>" role="button">View Order History</a>
+        <a href="/currentInformation" class="btn btn-primary col-md-3 <%= userRoles.customer ? null : 'disabled' %>" role="button">View Current Information</a>
+        <a href="/manageFoodTruck" class="btn btn-primary col-md-3 <%= userRoles.manager ? null : 'disabled' %>" role="button">Manage Food Truck</a>
+        <a href="/foodTruckSummary" class="btn btn-primary col-md-3 <%= userRoles.manager ? null : 'disabled' %>" role="button">View Food Truck Summary</a>
+        <a href="/manageBuildingAndStation" class="btn btn-primary col-md-3 <%= userRoles.admin ? null : 'disabled' %>" role="button">Manage Building & Station</a>
+        <a href="/manageFood" class="btn btn-primary col-md-3 <%= userRoles.admin ? null : 'disabled' %>" role="button">Manage Food</a>
+    </div>
+
+    <a href="/logout" class="btn btn-primary" role="button">Logout</a>
+</div>
+
+<%- include('partials/footer') %>

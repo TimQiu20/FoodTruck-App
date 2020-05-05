@@ -1,0 +1,91 @@
+<%- include('partials/header') %>
+
+<div class="container">
+    <h1>Food Truck Summary</h1>
+    <div class="container" style="border: 1px solid blue;">
+        <form action="/foodTruckSummary" method="POST">
+            <div class="form-group row">
+                <label for="foodTruckName" class="col-sm-2 col-form-label">Food Truck Name (contain)</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" id="foodTruckName" name="foodTruckName" placeholder="Name">
+                </div>
+                <label for="stationName" class="col-sm-2 col-form-label">Station Name</label>
+                <div class="col-sm-4">
+                    <select class="custom-select col" id="stationName" name="stationName">
+                        <option value="" selected>Station Name</option>
+                        <% if (stationNames) { %>
+                            <% stationNames.forEach(function(sn) { %>
+                                <option value="<%= sn.stationName %>"><%= sn.stationName %></option>
+                            <% }) %>
+                        <% } %>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="dateFrom" class="col-sm-2 col-form-label">Date Range</label>
+                <input type="date" id="dateFrom" name="dateFrom">
+                <p>----------</p>
+                <input type="date" id="dateTo" name="dateTo">
+            </div>
+
+            <div class="form-group row">
+                <label for="sortby">Sort by</label>
+                <select class="custom-select col" id="sortby" name="sortby">
+                    <option selected value="">Sort by...</option>
+                    <option value="foodTruckName">Food Truck Name</option>
+                    <option value="totalOrder">Total Order</option>
+                    <option value="totalRevenue">Total Revenue</option>
+                    <option value="totalCustomer">Total Customer</option>
+                </select>
+                <label for="order">Order</label>
+                <select class="custom-select col" id="order" name="order">
+                    <option selected value="">Order...</option>
+                    <option value="ASC">Ascending</option>
+                    <option value="DESC">Descending</option>
+                </select>
+            </div>
+
+            <div class="form-group row">
+                <button class="btn btn-primary" type="submit" style="margin: auto" name="submitBtn" value="filter">Filter</button>
+            </div>
+            <div class="form-group row">
+                <table style="width: 100%; margin: 10px">
+                    <tr>
+                        <th style="width: 20%">Food Truck Name</th>
+                        <th style="width: 15%"># Total Orders</th>
+                        <th style="width: 15%">Total Revenue</th>
+                        <th style="width: 10%"># Customer</th>
+                    </tr>
+                    <% if (summary) { %>
+                        <% summary.forEach(function(entry) { %>
+                            <tr>
+                                <td><input type="radio" value="<%= entry.foodTruckName %>" name="foodTruckRadioBtn" onclick="enableViewDetail()"><%= entry.foodTruckName %></td>
+                                <td><%= entry.totalOrder %></td>
+                                <td><%= entry.totalRevenue %></td>
+                                <td><%= entry.totalCustomer %></td>
+                            </tr>
+                        <% }) %>
+                    <% } %>
+                </table>
+            </div>
+            <a href="/home" class="btn btn-primary">Back</a>
+            <button type="submit" class="btn btn-primary" id="detail" name="submitBtn" value="detail" disabled>View Details</button>
+        </form>
+    </div>
+
+    <a href="/home" class="btn btn-primary" role="button">Home</a>
+    <a href="/logout" class="btn btn-primary" role="button">Logout</a>
+</div>
+
+<script>
+    function enableViewDetail() {
+        const updateBtn = document.getElementById("detail")
+        if (updateBtn.disabled) {
+            updateBtn.disabled = false
+        }
+    }
+</script>
+
+<%- include('partials/footer') %>
+

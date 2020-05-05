@@ -1,0 +1,77 @@
+<%- include('partials/header') %>
+
+<div class="container">
+    <h1>Manage Food Truck</h1>
+    <div class="container" style="border: 1px solid blue;">
+        <form action="/manageFoodTruck" method="POST">
+            <div class="form-row">
+                <div class="form-row">
+                    <label for="foodTruckName">Food Truck Name(contain)</label>
+                    <input type="text" class="form-control col" id="foodTruckName" name="foodTruckName" placeholder="Food Truck">
+                    <label for="sortby">Station Name</label>
+                    <select class="custom-select col" id="stationName" name="stationName">
+                        <option selected value="">Station Name</option>
+                        <% if (stations) { %>
+                            <% stations.forEach(function(s) { %>
+                                <option><%= s.stationName %></option>
+                            <% }) %>
+                        <% } %>
+                    </select>
+                    <button type="submit" class="btn btn-primary" name="submitBtn" value="filter">Filter</button>
+                </div>
+            </div>
+            <div class="form-row">
+                <label for="staffCountLower">Staff Count</label>
+                <input type="text" class="form-control col-md-1" id="staffCountLower" name="staffCountLower">
+                <p>------</p>
+                <input type="text" class="form-control col-md-1" id="staffCountUpper" name="staffCountUpper">
+
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="hasRemainingCapacity" name="hasRemainingCapacity">
+                    <label class="form-check-label" for="hasRemainingCapacity">Has Remaining Capacity</label>
+                </div>
+            </div>
+            <div class="form-row">
+                <table style="width: 100%">
+                    <tr>
+                        <th>Food Truck Name</th>
+                        <th>Station Name</th>
+                        <th>Remaining Capacity</th>
+                        <th>Staff(s)</th>
+                        <th># Menu Item</th>
+                    </tr>
+                    <% if (trucks) { %>
+                        <% trucks.forEach(function(truck) { %>
+                            <tr>
+                                <td><input type="radio" name="truckRadioBtn" onclick="enableUpdate()" value=<%= truck.foodTruckName %>><%= truck.foodTruckName %></td>
+                                <td name="actualStationName" value=<%= truck.stationName %>><%= truck.stationName %></td>
+                                <td><%= truck.remainingCapacity %></td>
+                                <td><%= truck.staffCount %></td>
+                                <td><%= truck.menuItemCount %></td>
+                            </tr>
+                        <% }) %>
+                    <% } %>
+                </table>
+            </div>
+
+            <a href="/home" class="btn btn-primary">Back</a>
+            <a href="/createFoodTruck" class="btn btn-primary">Create</a>
+            <button type="submit" class="btn btn-primary" name="submitBtn" id="updateBtn" value="update" disabled>Update</button>
+            <button type="submit" class="btn btn-primary" name="submitBtn" value="delete">Delete</button>
+        </form>
+    </div>
+
+    <a href="/home" class="btn btn-primary" role="button">Home</a>
+    <a href="/logout" class="btn btn-primary" role="button">Logout</a>
+</div>
+
+<script>
+    function enableUpdate() {
+        const updateBtn = document.getElementById("updateBtn")
+        if (updateBtn.disabled) {
+            updateBtn.disabled = false
+        }
+    }
+</script>
+
+<%- include('partials/footer') %>

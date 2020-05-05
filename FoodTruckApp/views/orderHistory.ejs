@@ -1,0 +1,33 @@
+<%- include('partials/header') %>
+<div class="container">
+  <h1>Order History</h1>
+  <div class="form-row">
+  <form action="/orderHistory" method="POST">
+    <table style="width: 100%">
+      <tr>
+        <th>Date</th>
+        <th>OrderID</th>
+        <th>Order Total</th>
+        <th>Food(s)</th>
+        <th>Food Quantity</th>
+      </tr>
+      <% if (orders) { %>
+        <% orders.forEach(function(order) { %>
+          <tr>
+            <td><value= <%= order.date %>> <%= order.date %></td>
+            <td><%= order.orderID %></td>
+            <td><%= order.orderTotal %></td>
+            <td><%= order.foodNames %></td>
+            <td><%= order.foodQuantity %></td>
+          </tr>
+        <% }) %>
+      <% } %>
+      </tr>
+      </form>
+    </table>
+  </div>
+  <a href="/home" class="btn btn-primary" role="button">Home</a>
+  <a href="/home" class="btn btn-primary" role="button">Back</a>
+  <a href="/logout" class="btn btn-primary" role="button">Logout</a>
+</div>
+<%- include('partials/footer') %>

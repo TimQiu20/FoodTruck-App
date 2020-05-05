@@ -1,0 +1,58 @@
+<%- include('partials/header') %>
+
+<div class="container">
+    <h1>Current Information</h1>
+    <form action="/currentInformation" method="POST">
+    <div class="form-row">
+      <label for="info">Station: </label>
+      <p><u><b><%= basic[0].stationName %></b></u></p >
+    </div>
+    <div class="form-row">
+      <label for="info">Building: </label>
+       <p><u><b><%= basic[0].buildingName %></b></u></p >
+    </div>
+    <div class="form-row">
+      <label for="info">Building Tags: </label>
+       <p><u><b><%= basic[0].tags %></b></u></p >
+    </div>
+    <div class="form-row">
+      <label for="info">Building Description: </label>
+       <p><u><b><%= basic[0].description %></b></u></p >
+    </div>
+    <div class="form-row">
+      <label for="info">Balance: </label>
+       <p><u><b><%= basic[0].balance %></b></u></p >
+    </div>
+    <div class="form-row">
+        <table style="width: 100%">
+            <tr>
+                <th>Food Truck</th>
+                <th>Manager</th>
+                <th>Food(s)</th>
+            </tr>
+            <% if (order) { %>
+                <% order.forEach(function(fn) { %>
+                    <tr>
+                        <td><input type="radio" name="orderRadio" id="order" onclick="enableOrder()" value="<%= fn.foodTruckName %>"><%= fn.foodTruckName %></td>
+                        <td><%= fn.managerName %></td>
+                        <td><%= fn.foodNames %></td>
+                    </tr>
+                <% }) %>
+            <% } %>
+        </table>
+    </div>
+    <a href="/home" class="btn btn-primary" role="button">Home</a>
+    <a href="/home" class="btn btn-primary" role="button">Back</a>
+    <button type="submit" class="btn btn-primary" name="submitBtn" id="orderbtn"value="order" disabled>Order</button>
+    
+</form>
+</div>
+<script>
+    function enableOrder() {
+        const updateBtn = document.getElementById("orderbtn")
+        if (updateBtn.disabled) {
+            updateBtn.disabled = false
+        }
+    }
+</script>
+<%- include('partials/footer') %>

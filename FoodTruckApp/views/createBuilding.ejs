@@ -1,0 +1,58 @@
+<%- include('partials/header') %>
+
+<div class="container">
+    <h1>Create Building</h1>
+
+    <div class="container" style="border: 1px solid blue;">
+        <form action="/createBuilding" method="POST">
+            <div class="form-group row">
+                <label for="buildingName" class="col-sm-1 col-form-label">Name</label>
+                <div class="col-sm-11">
+                    <input type="text" class="form-control" id="buildingName" name="buildingName" placeholder="Building Name">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="description" class="col-sm-1 col-form-label">Description</label>
+                <div class="col-sm-11">
+                    <textarea class="form-control rounded-0" id="description" name="description"></textarea>
+                </div>
+            </div>
+
+            <label class="col-sm-2 col-form-label">Tags</label>
+            <div id="tagList">
+                <div class="form-group row" id="tagListDivOrig">
+                    <input type="text" name="tagName">
+                    <button class="btn btn-primary col-sm-1" onclick="addElement(); return false;" id="addItem">ADD</button>
+                    <button class="btn btn-primary col-sm-1" onclick="removeElement(); return false;" id="removeItem">REMOVE</button>
+                </div>
+            </div>
+            <a href="/manageBuildingAndStation" class="btn btn-primary" role="button">Back</a>
+            <button type="submit" type="submit" class="btn btn-primary">Create</button>
+        </form>
+    </div>
+    <a href="/home" class="btn btn-primary" role="button">Home</a>
+    <a href="/logout" class="btn btn-primary" role="button">Logout</a>
+</div>
+
+<script>
+    function removeElement() {
+        const elements = document.getElementsByClassName('tagDiv');
+        while(elements.length > 0){
+            elements[0].parentNode.removeChild(elements[0]);
+        }
+    }
+    function addElement() {
+        const html = '<input type="text" name="tagName">' +
+                     '<button class="btn btn-primary col-sm-1" onclick="addElement(); return false;"value="add" id="addItem" name="manageItem">ADD</button>'
+        const parentId = 'tagList'
+        const p = document.getElementById(parentId);
+        const newElement = document.createElement('div');
+        newElement.setAttribute('class', 'form-group row tagDiv');
+        newElement.innerHTML = html;
+        p.appendChild(newElement.cloneNode(true));
+    }
+</script>
+<%- include('partials/footer') %>
+
+

@@ -1,0 +1,74 @@
+<%- include('partials/header') %>
+
+<div class="container">
+    <h1>Update Building</h1>
+
+    <div class="container" style="border: 1px solid blue;">
+        <form action="/updateBuilding" method="POST">
+            <div class="form-group row">
+                <label for="buildingName" class="col-sm-1 col-form-label">Name</label>
+                <div class="col-sm-11">
+                    <input type="text" class="form-control" id="buildingName" name="buildingName" value="<%= oldBuildingName %>" placeholder="Building Name">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="description" class="col-sm-1 col-form-label">Description</label>
+                <div class="col-sm-11">
+                    <input type="text" class="form-control" value="<%= oldDescription %>" id="description" name="description"></input>
+                </div>
+            </div>
+
+            <div class="form-group row" hidden>
+                <label for="oldBuildingName" class="col-sm-1 col-form-label">OLD NAME</label>
+                <div class="col-sm-11">
+                    <input type="text" class="form-control" id="oldBuildingName" name="oldBuildingName" value="<%= oldBuildingName %>" placeholder="MOTHERFUCKER">
+                </div>
+            </div>
+
+            <label class="col-sm-2 col-form-label">Existing Tags</label>
+            <div class="form-group row">
+                <ul>
+                    <% if (oldTags) { %>
+                        <% oldTags.forEach(function(t) { %>
+                            <li><%= t.tag %></li>
+                        <% }) %>
+                    <% } %>
+                </ul>
+            </div>
+
+            <label class="col-sm-2 col-form-label">Tags</label>
+            <div id="tagList">
+                <div class="form-group row" id="tagListDivOrig">
+                    <input type="text" name="tagName">
+                    <button class="btn btn-primary col-sm-1" onclick="addElement(); return false;" id="addItem">ADD</button>
+                    <button class="btn btn-primary col-sm-1" onclick="removeElement(); return false;" id="removeItem">REMOVE</button>
+                </div>
+            </div>
+            <a href="/manageBuildingAndStation" class="btn btn-primary" role="button">Back</a>
+            <button type="submit" type="submit" class="btn btn-primary">Update</button>
+        </form>
+    </div>
+    <a href="/home" class="btn btn-primary" role="button">Home</a>
+    <a href="/logout" class="btn btn-primary" role="button">Logout</a>
+</div>
+
+<script>
+    function removeElement() {
+        const elements = document.getElementsByClassName('tagDiv');
+        while(elements.length > 0){
+            elements[0].parentNode.removeChild(elements[0]);
+        }
+    }
+    function addElement() {
+        const html = '<input type="text" name="tagName">' +
+            '<button class="btn btn-primary col-sm-1" onclick="addElement(); return false;"value="add" id="addItem" name="manageItem">ADD</button>'
+        const parentId = 'tagList'
+        const p = document.getElementById(parentId);
+        const newElement = document.createElement('div');
+        newElement.setAttribute('class', 'form-group row tagDiv');
+        newElement.innerHTML = html;
+        p.appendChild(newElement.cloneNode(true));
+    }
+</script>
+<%- include('partials/footer') %>

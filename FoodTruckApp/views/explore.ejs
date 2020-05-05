@@ -1,0 +1,78 @@
+<%- include('partials/header') %>
+
+<div class="container">
+    <h1>Explore</h1>
+    <form action="/explore" method="POST">
+        <div class="form-row">
+            <div class="col">
+                <label for="buildingName">Building Name </label>
+                    <select class="custom-select col" id="buildingName" name="buildingName">
+                        <option selected value="">Building Name</option>
+                        <% bnames.forEach(function(b) { %>
+                        <option value="<%= b.buildingName %>"><%= b.buildingName %></option>
+                        <% }) %>
+                    </select>
+            </div>
+            <div class="col">
+                <label for="stationName">Station Name </label>
+                    <select class="custom-select col" id="stationName" name="stationName">
+                        <option selected value="">Station Name</option>
+                        <% snames.forEach(function(s) { %>
+                        s<option value="<%= s.stationName %>"><%= s.stationName %></option>
+                        <% }) %>
+                    </select>
+            </div>
+            <div class="col">
+            <label for="buildingTag">Building Tag(contain)</label>
+                <input type="text" class="form-control col" id="buildingTag" name="buildingTag" placeholder="Building Tag">
+            </div>
+            <div class="col">
+            <label for="foodTruckName">Food Truck Name(contain)</label>
+                <input type="text" class="form-control col" id="foodTruckName" name="foodTruckName" placeholder="Food Truck">
+            </div>
+            <div class="col">
+            <label for="foodName">Food Name(contain)</label>
+                <input type="text" class="form-control col" id="foodName" name="foodName" placeholder="Food">
+            </div>
+
+        </div>
+        <button type="submit" class="btn btn-primary"  name="submitBtn" value="filter">Filter</button>
+
+            <div class="form-row">
+                <table style="width: 100%">
+                    <tr>
+                        <th>Station</th>
+                        <th>Building</th>
+                        <th>Food Truck(s)</th>
+                        <th>Food(s)</th>
+                    </tr>
+                    <% if (info) { %>
+                    <% info.forEach(function(ret) { %>
+                        <tr>
+                            <td><input type="radio" name="stationRadio" onclick="enableSelectStation()" value="<%= ret.stationName %>"><%= ret.stationName %></td>
+                            <td><%= ret.buildingName %></td>
+                            <td><%= ret.foodTruckNames %></td>
+                            <td><%= ret.foodNames %></td>
+                        </tr>
+                    <% }) %>
+                <% } %>
+                </table>
+            </div>
+
+        <a href="/home" class="btn btn-primary">Back</a>
+        <button type="submit" class="btn btn-primary" name="submitBtn" id="selectStation"value="Selete As Current Location" disabled>Select As Current Location</button>
+    </form>
+<div>
+    <a href="/home" class="btn btn-primary" role="button">Home</a>
+    <a href="/logout" class="btn btn-primary" role="button">Logout</a>
+</div>
+
+<script>
+    function enableSelectStation() {
+        const updateBtn = document.getElementById("selectStation")
+        if (updateBtn.disabled) {
+            updateBtn.disabled = false
+        }
+    }
+</script>
+<%- include('partials/footer') %>

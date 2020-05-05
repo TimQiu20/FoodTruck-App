@@ -1,0 +1,100 @@
+<%- include('partials/header') %>
+
+<div class="container">
+    <h1>Update Food Truck</h1>
+
+    <div class="container" style="border: 1px solid blue;">
+        <form action="/updateFoodTruck" method="POST">
+            <div class="form-group row">
+                <label for="foodTruckName" class="col-sm-1 col-form-label">Name</label>
+                <div class="col-sm-11">
+                    <input type="text" class="form-control" id="foodTruckName" name="foodTruckName" value=<%= foodTruckName %>>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="stationName" class="col-sm-1 col-form-label">Station</label>
+                <select class="custom-select col" id="stationName" name="stationName">
+                    <% if (stations) { %>
+                        <% stations.forEach(function(s) { %>
+                            <option><%= s.stationName %></option>
+                        <% }) %>
+                    <% } %>
+                </select>
+            </div>
+
+            <div class="form-group row">
+                <label for="assignedStaff" class="col-sm-2 col-form-label">Assigned Staff</label>
+                <select class="custom-select col-sm-4" multiple>
+                    <% if (availableStaff) { %>
+                        <% availableStaff.forEach(function(a) { %>
+                            <option value=<%= a.username %>><%= a.fullname %></option>
+                        <% }) %>
+                    <% } %>
+                </select>
+            </div>
+
+            <label class="col-sm-2 col-form-label">Menu Item</label>
+            <div id="menuItemList">
+                <div class="form-group row" id="menuItemDivOrig">
+                    <label for="foodName" class="col-sm-1 col-form-label">Food</label>
+                    <select class="custom-select col-sm-2" id="foodName" name="foodName">
+                        <option selected value="">Menu Item</option>
+                        <% if (foods) { %>
+                            <% foods.forEach(function(f) { %>
+                                <option value=<%= f.foodName %>><%= f.foodName %></option>
+                            <% }) %>
+                        <% } %>
+                    </select>
+
+                    <label for="price" class="col-sm-1 col-form-label">Price</label>
+                    <input type="text" class="form-control col-sm-2" id="price" name="price">
+
+                    <button class="btn btn-primary col-sm-1" onclick="addElement(); return false;" id="addItem" name="manageItem">ADD</button>
+                    <button class="btn btn-primary col-sm-1" onclick="removeElement(); return false;" id="removeItem" name="manageItem">REMOVE</button>
+                </div>
+            </div>
+            <div class="form-group row">
+                <a href="/manageFoodTruck" class="btn btn-primary col-sm-1" role="button">Back</a>
+                <button class="btn btn-primary" type="submit">Update</button>
+            </div>
+
+        </form>
+    </div>
+
+    <a href="/home" class="btn btn-primary" role="button">Home</a>
+    <a href="/logout" class="btn btn-primary" role="button">Logout</a>
+</div>
+
+<script>
+    function removeElement() {
+        const element = document.getElementsByClassName('menuItemDiv')
+        element.parentNode.removeChild(element);
+    }
+    function addElement() {
+        const html = '<label for="foodName" class="col-sm-1 col-form-label">Food</label>' +
+            '<select class="custom-select col-sm-2" id="foodName" name="foodName">' +
+            '<option selected value="">Menu Item</option>' +
+            '<option value="">orange</option>' +
+                '<% if (foods) { %>' +
+                '<% foods.forEach(function(f) { %>' +
+                '<option value=<%= f.foodName %>><%= f.foodName %></option>' +
+                '<% }) %>' +
+                '<% } %>' +
+            '</select>' +
+            '<label for="price" class="col-sm-1 col-form-label">Price</label>' +
+            '<input type="text" class="form-control col-sm-2" id="price" name="price">' +
+            '<button class="btn btn-primary col-sm-1" onclick="addElement(); return false;"value="add" id="addItem" name="manageItem">ADD</button>'
+        const parentId = 'menuItemList'
+        const p = document.getElementById(parentId);
+        const newElement = document.createElement('div');
+        newElement.setAttribute('class', 'form-group row menuItemDiv');
+        newElement.innerHTML = html;
+        p.appendChild(newElement.cloneNode(true));
+    }
+    function preselect() {
+        document.getElementById("stationName").value = "<%= stationName %>"
+    }
+    preselect()
+</script>
+<%- include('partials/footer') %>

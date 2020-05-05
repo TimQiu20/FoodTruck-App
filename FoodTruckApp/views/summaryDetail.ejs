@@ -1,0 +1,37 @@
+<%- include('partials/header') %>
+
+<div class="container">
+    <h1>Summary Detail</h1>
+
+
+    <h4>Food Truck Name: <%= foodTruckName %> </h4>
+
+    <div class="form-row">
+        <table style="width: 100%">
+            <tr>
+                <th>Date</th>
+                <th>Customer</th>
+                <th>Total Purchase</th>
+                <th># Orders</th>
+                <th>Food(s)</th>
+            </tr>
+            <% if (details) { %>
+                <% details.forEach(function(detail) { %>
+                    <tr>
+                        <td><%= detail.date %></td>
+                        <td><%= detail.customerName %></td>
+                        <td><%= detail.totalPurchase %></td>
+                        <td><%= detail.orderCount %></td>
+                        <td><%= detail.foodNames %></td>
+                    </tr>
+                <% }) %>
+            <% } %>
+        </table>
+    </div>
+
+    <a href="/foodTruckSummary" class="btn btn-primary" role="button">Back</a>
+    <a href="/home" class="btn btn-primary" role="button">Home</a>
+    <a href="/logout" class="btn btn-primary" role="button">Logout</a>
+</div>
+
+<%- include('partials/footer') %>

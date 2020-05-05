@@ -1,0 +1,98 @@
+<%- include('partials/header') %>
+
+<div class="container">
+    <h1>Manage Building & Station</h1>
+    <div class="container" style="border: 1px solid blue;">
+        <form action="/manageBuildingAndStation" method="POST">
+            <div class="form-group row">
+                <label for="buildingName" class="col-sm-2 col-form-label">Building Name</label>
+                <div class="col-sm-4">
+                    <select class="custom-select col" id="buildingName" name="buildingName">
+                        <option selected value="">Building Name</option>
+                        <% bnames.forEach(function(b) { %>
+                        <option value="<%= b %>"><%= b %></option>
+                        <% }) %>
+                    </select>
+                </div>
+                <label for="buildingTag" class="col-sm-2 col-form-label">Building Tag(contain)</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" id="buildingTag" name="buildingTag" placeholder="Tag">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="stationName" class="col-sm-2 col-form-label">Station Name</label>
+                <div class="col-sm-4">
+                    <select class="custom-select col" id="stationName" name="stationName">
+                        <option selected value="">Station Name</option>
+                        <% snames.forEach(function(s) { %>
+                            <option value="<%= s %>"><%= s %></option>
+                        <% }) %>
+                    </select>
+                </div>
+                    <label for="capacityLower" class="col-sm-2 col-form-label">Capacity</label>
+                    <input type="text" class="form-control col-sm-1" id="capacityLower" name="capacityLower">
+                    <p>------</p>
+                    <input type="text" class="form-control col-sm-1" id="capacityUpper" name="capacityUpper">
+            </div>
+            <div class="form-group row">
+                <button class="btn btn-primary" type="submit" style="margin: auto" name="submitBtn" value="filter">Filter</button>
+            </div>
+            <div class="form-group row">
+            <table style="width: 100%; margin: 10px">
+                <tr>
+                    <th style="width: 20%">Building</th>
+                    <th style="width: 15%">Tag(s)</th>
+                    <th style="width: 15%">Station</th>
+                    <th style="width: 10%">Capacity</th>
+                    <th style="width: 40%">Food Truck(s)</th>
+                </tr>
+                <% if (bldgInfo) { %>
+                    <% bldgInfo.forEach(function(bldg) { %>
+                        <tr>
+                            <td><input type="radio" name="buildingRadioBtn" onclick="enableBuildingUpdate()" value="<%= bldg.buildingName %>"><%= bldg.buildingName %></td>
+                            <td><%= bldg.tags %></td>
+                            <td><input type="radio" name="stationRadioBtn" onclick="enableStationUpdate()" value="<%= bldg.stationName %>"><%= bldg.stationName %></td>
+                            <td><%= bldg.capacity %></td>
+                            <td><%= bldg.foodTruckNames %></td>
+                        </tr>
+                    <% }) %>
+                <% } %>
+            </table>
+            </div>
+            <a href="/home" class="btn btn-primary">Back</a>
+            <a href="/createBuilding" class="btn btn-primary">Create Building</a>
+            <a href="/createStation" class="btn btn-primary">Create Station</a>
+            <button type="submit" class="btn btn-primary" name="submitBtn" id="updateBuilding" value="updateBuilding" disabled>Update Building</button>
+            <button type="submit" class="btn btn-primary" name="submitBtn" id="updateStation" value="updateStation" disabled>Update Station</button>
+            <button type="submit" class="btn btn-primary" name="submitBtn" value="deleteBuilding">Delete Building</button>
+            <button type="submit" class="btn btn-primary" name="submitBtn" value="deleteStation">Delete Station</button>
+        </form>
+    </div>
+
+    <a href="/home" class="btn btn-primary" role="button">Home</a>
+    <a href="/logout" class="btn btn-primary" role="button">Logout</a>
+</div>
+
+<script>
+    function enableBuildingUpdate() {
+        const updateBtn = document.getElementById("updateBuilding")
+        if (updateBtn.disabled) {
+            updateBtn.disabled = false
+        }
+    }
+
+    function enableStationUpdate() {
+        const updateBtn = document.getElementById("updateStation")
+        if (updateBtn.disabled) {
+            updateBtn.disabled = false
+        }
+    }
+</script>
+
+
+
+
+
+<%- include('partials/footer') %>
+

@@ -1,0 +1,43 @@
+<%- include('partials/header') %>
+
+<div class="container">
+    <h1>Update Station</h1>
+
+    <div class="container" style="border: 1px solid blue; width: 100%">
+        <form action="/updateStation" method="POST">
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="stationName">Name</label>
+                    <input type="text" class="form-control" id="stationName" name="stationName" value="<%= oldStationName %>" placeholder="Station Name" readonly>
+                </div>
+            </div>
+
+             <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="stationCapacity">Capacity</label>
+                    <input type="text" class="form-control" id="stationCapacity" name="stationCapacity" value="<%= oldCapacity %>" placeholder="10" required>
+                </div>
+
+                 <div class="form-group col-md-4">
+                    <label for="sponsoredBuilding">Sponsored Building</label>
+                    <select class="custom-select" id="sponsoredBuilding" name="sponsoredBuilding">
+                        <option value="<%= oldBuilding %>" selected><%= oldBuilding %></option>
+                        <% if (buildingNames) { %>
+                            <% buildingNames.forEach(function(bn) { %>
+                                <option value="<%= bn.buildingName %>"><%= bn.buildingName %></option>
+                            <% }) %>
+                        <% } %>
+                    </select>
+                </div>
+           </div>
+
+           <a href="/manageBuildingAndStation" class="btn btn-primary" role="button">Back</a>
+            <button type="submit" class="btn btn-primary">Update</button>
+        </form>
+    </div>
+
+    <a href="/home" class="btn btn-primary" role="button">Home</a>
+    <a href="/logout" class="btn btn-primary" role="button">Logout</a>
+</div>
+
+<%- include('partials/footer') %>

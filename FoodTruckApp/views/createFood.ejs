@@ -1,0 +1,24 @@
+<%- include('partials/header') %>
+
+<div class="container">
+    <h1>Create Food</h1>
+
+    <div class="container" style="border: 1px solid blue;">
+        <form action="/createFood" method="POST">
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="foodname">Name</label>
+                    <input type="text" class="form-control" id="foodname" name="foodname" placeholder="Apple" required>
+                </div>
+            </div>
+
+            <a href="/manageFood" class="btn btn-primary" role="button">Back</a>
+            <button type="submit" class="btn btn-primary">Create</button>
+        </form>
+    </div>
+
+    <a href="/home" class="btn btn-primary" role="button">Home</a>
+    <a href="/logout" class="btn btn-primary" role="button">Logout</a>
+</div>
+
+<%- include('partials/footer') %>

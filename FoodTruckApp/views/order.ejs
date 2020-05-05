@@ -1,0 +1,51 @@
+<%- include('partials/header') %>
+
+<div class="container">
+    <h1>Order</h1>
+    <div class="container" style="border: 1px solid blue; width: 100%">
+        <form action="/order" method="POST">
+        	<div class="form-row">
+		    	<label>Food Truck Name: </label>
+		    	<u><b><p><%= ftName %></p></b></u>
+				<input name="foodTruckName" value="<%= ftName %>" hidden>
+			</div>
+
+			<div class="form-row">
+		        <table style="width: 100%">
+		            <tr>
+		                <th>Food</th>
+		                <th>Price($)</th>
+		                <th>Purchase Quantity</th>
+		            </tr>
+		            <% if (item) { %>
+		                <% item.forEach(function(fn) { %>
+		                    <tr>
+		                        <td>
+		                        	<input type="checkbox" name="foodChecked" value=<%= fn.foodName %>> <%= fn.foodName %>
+		                        </td>
+								<input name="foodPrice" value="<%= fn.price %>" hidden>
+		                        <td name="foodPrice" value="<%= fn.price %>"><%= fn.price %></td>
+		                        <td>
+									<input type="number" value="0" class="form-control" id="pq" name="pq" min="0" max="100" style="width: 30%">
+<!--				                    <input type="text" class="form-control" name = "pQ" id="purchaseQuantity" name="purchaseQuantity" >-->
+		                        </td>
+		                    </tr>
+		                <% }) %>
+		            <% } %>
+		        </table>
+		    </div>
+
+		    <div class="form-row">
+			    <label for="date">Date</label>
+		        <input type="date" class="form-control col-md-3" id="date" name="date">
+		    </div>
+			<a href="/currentInformation" class="btn btn-primary">Back</a>
+		    <button type="submit" class="btn btn-primary" name="submitBtn" value="submit">Submit</button>
+        </form>
+    </div>
+
+    <a href="/home" class="btn btn-primary" role="button">Home</a>
+    <a href="/logout" class="btn btn-primary" role="button">Logout</a>
+</div>
+
+<%- include('partials/footer') %>
