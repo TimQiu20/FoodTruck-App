@@ -11,9 +11,7 @@ and add your local settings (below is an example of default)
   c. DB_USER =root  
   d. DB_PASSWORD =’’  
   e. DB_NAME =cs4400spring2020  
-4. Direct to FoodTruckApp root folder in terminal in the following sequence
-  a. Phase4
-  b. FoodTruckApp
+4. Direct to FoodTruckApp root folder
 5. Run ‘npm install’
 6. Run ‘npm dev run’ to get the website address
 7. Open the URL (Default to be Localhost: 3000) it directs in a new window to load
