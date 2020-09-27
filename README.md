@@ -1,10 +1,11 @@
 ## GT Food Truck 
 
  
-Project Purpose 
+### Project Purpose 
+
 In this project you will analyze, specify, design, implement, document and demonstrate an online system. You are required to use the classical methodology for database development. The system will be implemented using a relational DBMS that supports standard SQL queries. You will use your localhost MySQL Server (Version 5.1 or above) to implement your database and the application. You also cannot use any other software like Access or SQLite.
  
-Project Description 
+### Project Description 
 Introduction 
 In this project, you can your teammates will design and implement a food truck system with the following requirements using relational database concepts. 
 General Notes: 
@@ -14,6 +15,8 @@ General Notes:
 4.	In the case for update and delete, you must select an item in the table first 
 5.	Radio button indicates the selection is single  ; check box indicates the selection can be multiple   
 6.	All number and date ranges in the filter criteria are inclusive 
+
+
 Screen 1: Login 
  
 Notes: 
